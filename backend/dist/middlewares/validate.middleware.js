@@ -4,10 +4,11 @@ export function validate(schema) {
         const validation = schema.safeParse(req.body);
         if (!validation.success) {
             res.status(400).json({
-                error: "Validation failed"
+                error: validation.error.issues
             });
             return;
         }
+        req.body = validation.data;
         next();
     };
 }
