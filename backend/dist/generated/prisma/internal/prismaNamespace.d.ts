@@ -604,7 +604,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export declare const BoardScalarFieldEnum: {
     readonly id: 'id';
     readonly title: 'title';
-    readonly adminId: 'adminId';
+    readonly ownerId: 'ownerId';
 };
 export type BoardScalarFieldEnum = (typeof BoardScalarFieldEnum)[keyof typeof BoardScalarFieldEnum];
 export declare const ListScalarFieldEnum: {
@@ -617,8 +617,9 @@ export type ListScalarFieldEnum = (typeof ListScalarFieldEnum)[keyof typeof List
 export declare const CardScalarFieldEnum: {
     readonly id: 'id';
     readonly title: 'title';
+    readonly description: 'description';
     readonly order: 'order';
-    readonly ListId: 'ListId';
+    readonly listId: 'listId';
 };
 export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof CardScalarFieldEnum];
 export declare const SortOrder: {
@@ -631,6 +632,11 @@ export declare const QueryMode: {
     readonly insensitive: 'insensitive';
 };
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
+export declare const NullsOrder: {
+    readonly first: 'first';
+    readonly last: 'last';
+};
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
 /**
  * Field references
  */

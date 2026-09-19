@@ -21,20 +21,23 @@ export type CardSumAggregateOutputType = {
 export type CardMinAggregateOutputType = {
     id: string | null;
     title: string | null;
+    description: string | null;
     order: number | null;
-    ListId: string | null;
+    listId: string | null;
 };
 export type CardMaxAggregateOutputType = {
     id: string | null;
     title: string | null;
+    description: string | null;
     order: number | null;
-    ListId: string | null;
+    listId: string | null;
 };
 export type CardCountAggregateOutputType = {
     id: number;
     title: number;
+    description: number;
     order: number;
-    ListId: number;
+    listId: number;
     _all: number;
 };
 export type CardAvgAggregateInputType = {
@@ -46,20 +49,23 @@ export type CardSumAggregateInputType = {
 export type CardMinAggregateInputType = {
     id?: true;
     title?: true;
+    description?: true;
     order?: true;
-    ListId?: true;
+    listId?: true;
 };
 export type CardMaxAggregateInputType = {
     id?: true;
     title?: true;
+    description?: true;
     order?: true;
-    ListId?: true;
+    listId?: true;
 };
 export type CardCountAggregateInputType = {
     id?: true;
     title?: true;
+    description?: true;
     order?: true;
-    ListId?: true;
+    listId?: true;
     _all?: true;
 };
 export type CardAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -141,8 +147,9 @@ export type CardGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type CardGroupByOutputType = {
     id: string;
     title: string;
+    description: string | null;
     order: number;
-    ListId: string;
+    listId: string;
     _count: CardCountAggregateOutputType | null;
     _avg: CardAvgAggregateOutputType | null;
     _sum: CardSumAggregateOutputType | null;
@@ -158,15 +165,17 @@ export type CardWhereInput = {
     NOT?: Prisma.CardWhereInput | Prisma.CardWhereInput[];
     id?: Prisma.StringFilter<"Card"> | string;
     title?: Prisma.StringFilter<"Card"> | string;
+    description?: Prisma.StringNullableFilter<"Card"> | string | null;
     order?: Prisma.IntFilter<"Card"> | number;
-    ListId?: Prisma.StringFilter<"Card"> | string;
+    listId?: Prisma.StringFilter<"Card"> | string;
     list?: Prisma.XOR<Prisma.ListScalarRelationFilter, Prisma.ListWhereInput>;
 };
 export type CardOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
     title?: Prisma.SortOrder;
+    description?: Prisma.SortOrderInput | Prisma.SortOrder;
     order?: Prisma.SortOrder;
-    ListId?: Prisma.SortOrder;
+    listId?: Prisma.SortOrder;
     list?: Prisma.ListOrderByWithRelationInput;
 };
 export type CardWhereUniqueInput = Prisma.AtLeast<{
@@ -175,15 +184,17 @@ export type CardWhereUniqueInput = Prisma.AtLeast<{
     OR?: Prisma.CardWhereInput[];
     NOT?: Prisma.CardWhereInput | Prisma.CardWhereInput[];
     title?: Prisma.StringFilter<"Card"> | string;
+    description?: Prisma.StringNullableFilter<"Card"> | string | null;
     order?: Prisma.IntFilter<"Card"> | number;
-    ListId?: Prisma.StringFilter<"Card"> | string;
+    listId?: Prisma.StringFilter<"Card"> | string;
     list?: Prisma.XOR<Prisma.ListScalarRelationFilter, Prisma.ListWhereInput>;
 }, "id">;
 export type CardOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
     title?: Prisma.SortOrder;
+    description?: Prisma.SortOrderInput | Prisma.SortOrder;
     order?: Prisma.SortOrder;
-    ListId?: Prisma.SortOrder;
+    listId?: Prisma.SortOrder;
     _count?: Prisma.CardCountOrderByAggregateInput;
     _avg?: Prisma.CardAvgOrderByAggregateInput;
     _max?: Prisma.CardMaxOrderByAggregateInput;
@@ -196,49 +207,57 @@ export type CardScalarWhereWithAggregatesInput = {
     NOT?: Prisma.CardScalarWhereWithAggregatesInput | Prisma.CardScalarWhereWithAggregatesInput[];
     id?: Prisma.StringWithAggregatesFilter<"Card"> | string;
     title?: Prisma.StringWithAggregatesFilter<"Card"> | string;
+    description?: Prisma.StringNullableWithAggregatesFilter<"Card"> | string | null;
     order?: Prisma.IntWithAggregatesFilter<"Card"> | number;
-    ListId?: Prisma.StringWithAggregatesFilter<"Card"> | string;
+    listId?: Prisma.StringWithAggregatesFilter<"Card"> | string;
 };
 export type CardCreateInput = {
     id?: string;
     title: string;
+    description?: string | null;
     order: number;
     list: Prisma.ListCreateNestedOneWithoutCardsInput;
 };
 export type CardUncheckedCreateInput = {
     id?: string;
     title: string;
+    description?: string | null;
     order: number;
-    ListId: string;
+    listId: string;
 };
 export type CardUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     order?: Prisma.IntFieldUpdateOperationsInput | number;
     list?: Prisma.ListUpdateOneRequiredWithoutCardsNestedInput;
 };
 export type CardUncheckedUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     order?: Prisma.IntFieldUpdateOperationsInput | number;
-    ListId?: Prisma.StringFieldUpdateOperationsInput | string;
+    listId?: Prisma.StringFieldUpdateOperationsInput | string;
 };
 export type CardCreateManyInput = {
     id?: string;
     title: string;
+    description?: string | null;
     order: number;
-    ListId: string;
+    listId: string;
 };
 export type CardUpdateManyMutationInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     order?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type CardUncheckedUpdateManyInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     order?: Prisma.IntFieldUpdateOperationsInput | number;
-    ListId?: Prisma.StringFieldUpdateOperationsInput | string;
+    listId?: Prisma.StringFieldUpdateOperationsInput | string;
 };
 export type CardListRelationFilter = {
     every?: Prisma.CardWhereInput;
@@ -251,8 +270,9 @@ export type CardOrderByRelationAggregateInput = {
 export type CardCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
     order?: Prisma.SortOrder;
-    ListId?: Prisma.SortOrder;
+    listId?: Prisma.SortOrder;
 };
 export type CardAvgOrderByAggregateInput = {
     order?: Prisma.SortOrder;
@@ -260,14 +280,16 @@ export type CardAvgOrderByAggregateInput = {
 export type CardMaxOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
     order?: Prisma.SortOrder;
-    ListId?: Prisma.SortOrder;
+    listId?: Prisma.SortOrder;
 };
 export type CardMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
     order?: Prisma.SortOrder;
-    ListId?: Prisma.SortOrder;
+    listId?: Prisma.SortOrder;
 };
 export type CardSumOrderByAggregateInput = {
     order?: Prisma.SortOrder;
@@ -310,14 +332,19 @@ export type CardUncheckedUpdateManyWithoutListNestedInput = {
     updateMany?: Prisma.CardUpdateManyWithWhereWithoutListInput | Prisma.CardUpdateManyWithWhereWithoutListInput[];
     deleteMany?: Prisma.CardScalarWhereInput | Prisma.CardScalarWhereInput[];
 };
+export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null;
+};
 export type CardCreateWithoutListInput = {
     id?: string;
     title: string;
+    description?: string | null;
     order: number;
 };
 export type CardUncheckedCreateWithoutListInput = {
     id?: string;
     title: string;
+    description?: string | null;
     order: number;
 };
 export type CardCreateOrConnectWithoutListInput = {
@@ -347,57 +374,66 @@ export type CardScalarWhereInput = {
     NOT?: Prisma.CardScalarWhereInput | Prisma.CardScalarWhereInput[];
     id?: Prisma.StringFilter<"Card"> | string;
     title?: Prisma.StringFilter<"Card"> | string;
+    description?: Prisma.StringNullableFilter<"Card"> | string | null;
     order?: Prisma.IntFilter<"Card"> | number;
-    ListId?: Prisma.StringFilter<"Card"> | string;
+    listId?: Prisma.StringFilter<"Card"> | string;
 };
 export type CardCreateManyListInput = {
     id?: string;
     title: string;
+    description?: string | null;
     order: number;
 };
 export type CardUpdateWithoutListInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     order?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type CardUncheckedUpdateWithoutListInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     order?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type CardUncheckedUpdateManyWithoutListInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     order?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type CardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     title?: boolean;
+    description?: boolean;
     order?: boolean;
-    ListId?: boolean;
+    listId?: boolean;
     list?: boolean | Prisma.ListDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["card"]>;
 export type CardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     title?: boolean;
+    description?: boolean;
     order?: boolean;
-    ListId?: boolean;
+    listId?: boolean;
     list?: boolean | Prisma.ListDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["card"]>;
 export type CardSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     title?: boolean;
+    description?: boolean;
     order?: boolean;
-    ListId?: boolean;
+    listId?: boolean;
     list?: boolean | Prisma.ListDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["card"]>;
 export type CardSelectScalar = {
     id?: boolean;
     title?: boolean;
+    description?: boolean;
     order?: boolean;
-    ListId?: boolean;
+    listId?: boolean;
 };
-export type CardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "order" | "ListId", ExtArgs["result"]["card"]>;
+export type CardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "order" | "listId", ExtArgs["result"]["card"]>;
 export type CardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     list?: boolean | Prisma.ListDefaultArgs<ExtArgs>;
 };
@@ -415,8 +451,9 @@ export type $CardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string;
         title: string;
+        description: string | null;
         order: number;
-        ListId: string;
+        listId: string;
     }, ExtArgs["result"]["card"]>;
     composites: {};
 };
@@ -774,8 +811,9 @@ export interface Prisma__CardClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface CardFieldRefs {
     readonly id: Prisma.FieldRef<"Card", 'String'>;
     readonly title: Prisma.FieldRef<"Card", 'String'>;
+    readonly description: Prisma.FieldRef<"Card", 'String'>;
     readonly order: Prisma.FieldRef<"Card", 'Int'>;
-    readonly ListId: Prisma.FieldRef<"Card", 'String'>;
+    readonly listId: Prisma.FieldRef<"Card", 'String'>;
 }
 /**
  * Card findUnique

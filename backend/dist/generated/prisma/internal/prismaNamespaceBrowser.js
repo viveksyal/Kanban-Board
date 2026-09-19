@@ -62,7 +62,7 @@ export const UserScalarFieldEnum = {
 export const BoardScalarFieldEnum = {
     id: 'id',
     title: 'title',
-    adminId: 'adminId'
+    ownerId: 'ownerId'
 };
 export const ListScalarFieldEnum = {
     id: 'id',
@@ -73,8 +73,9 @@ export const ListScalarFieldEnum = {
 export const CardScalarFieldEnum = {
     id: 'id',
     title: 'title',
+    description: 'description',
     order: 'order',
-    ListId: 'ListId'
+    listId: 'listId'
 };
 export const SortOrder = {
     asc: 'asc',
@@ -83,5 +84,9 @@ export const SortOrder = {
 export const QueryMode = {
     default: 'default',
     insensitive: 'insensitive'
+};
+export const NullsOrder = {
+    first: 'first',
+    last: 'last'
 };
 //# sourceMappingURL=prismaNamespaceBrowser.js.map

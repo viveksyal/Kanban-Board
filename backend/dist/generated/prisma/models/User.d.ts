@@ -172,28 +172,28 @@ export type UserCreateInput = {
     email: string;
     password: string;
     name: string;
-    boards?: Prisma.BoardCreateNestedManyWithoutAdminInput;
+    boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput;
 };
 export type UserUncheckedCreateInput = {
     id?: string;
     email: string;
     password: string;
     name: string;
-    boards?: Prisma.BoardUncheckedCreateNestedManyWithoutAdminInput;
+    boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput;
 };
 export type UserUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     email?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
-    boards?: Prisma.BoardUpdateManyWithoutAdminNestedInput;
+    boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput;
 };
 export type UserUncheckedUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     email?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
-    boards?: Prisma.BoardUncheckedUpdateManyWithoutAdminNestedInput;
+    boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput;
 };
 export type UserCreateManyInput = {
     id?: string;
