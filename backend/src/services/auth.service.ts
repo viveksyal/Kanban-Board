@@ -1,7 +1,8 @@
-import { hashPassword } from "../utils/hash.utils.js";
+import { comparePassword, hashPassword } from "../utils/hash.utils.js";
 import { PrismaClient } from "../generated/prisma/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { appError } from "../utils/error.utils.js";
+import { signToken } from "../utils/jwt.utils.js";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
@@ -10,6 +11,11 @@ type RegisterUserType = {
     email: string,
     password: string,
     name: string
+}
+
+type LoginUserType = {
+    email: string,
+    password: string,
 }
 
 
@@ -34,4 +40,20 @@ export async function registerUser({email, password, name}: RegisterUserType){
         }
     })
     return newUser;
+}
+
+export async function loginUser({email, password}: LoginUserType){
+    const userExists = await prisma.user.findUnique({
+        where: {email},
+        select: {password: true, id: true}
+    });
+
+    if (!userExists){
+        throw appError("Invalid credentials", 401);
+    }
+    const isPasswordCorrect = await comparePassword(password, userExists.password)
+    if (!isPasswordCorrect){
+        throw appError("Invalid credentials", 401);
+    }
+    return signToken({userId: userExists.id});
 }

@@ -4,4 +4,8 @@ export const RegisterSchema = z.object({
     password: z.string().min(8),
     name: z.string().trim().min(1)
 });
+export const LoginSchema = z.object({
+    email: z.string().email({ message: "Invalid email format" }).trim(),
+    password: z.string().min(8)
+});
 //# sourceMappingURL=auth.validator.js.map
