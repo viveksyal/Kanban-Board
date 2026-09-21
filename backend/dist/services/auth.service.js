@@ -37,4 +37,14 @@ export async function loginUser({ email, password }) {
     }
     return signToken({ userId: userExists.id });
 }
+export async function getMe(userId) {
+    const userData = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, name: true, email: true }
+    });
+    if (userData === null) {
+        throw appError("Invalid session", 401);
+    }
+    return userData;
+}
 //# sourceMappingURL=auth.service.js.map

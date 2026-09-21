@@ -57,3 +57,13 @@ export async function loginUser({email, password}: LoginUserType){
     }
     return signToken({userId: userExists.id});
 }
+export async function getMe(userId: string){
+    const userData = await prisma.user.findUnique({
+        where: {id: userId},
+        select: {id: true, name: true, email: true}
+    });
+    if (userData === null){
+        throw appError("Invalid session", 401);
+    }
+    return userData;
+}
