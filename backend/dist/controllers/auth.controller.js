@@ -1,6 +1,4 @@
 import { getMe, loginUser, registerUser } from "../services/auth.service.js";
-import cookieParser from "cookie-parser";
-import { email } from "zod";
 export async function registerController(req, res) {
     const { email, password, name } = req.body;
     const newUser = await registerUser({ email, password, name });

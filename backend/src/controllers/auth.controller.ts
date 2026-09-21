@@ -1,7 +1,6 @@
 import { getMe, loginUser, registerUser } from "../services/auth.service.js";
 import type { Request, Response } from "express";
-import cookieParser from "cookie-parser";
-import { email } from "zod";
+
 
 export async function registerController(req: Request, res: Response){
     const {email, password, name} = req.body;
