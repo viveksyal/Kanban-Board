@@ -11,4 +11,11 @@ export async function createBoard({ userId, title }) {
     });
     return boardData;
 }
+export async function getBoards(userId) {
+    const boards = await prisma.board.findMany({
+        where: { ownerId: userId },
+        select: { id: true, title: true }
+    });
+    return boards;
+}
 //# sourceMappingURL=board.service.js.map

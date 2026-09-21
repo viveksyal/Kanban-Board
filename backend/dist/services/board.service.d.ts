@@ -7,5 +7,9 @@ export declare function createBoard({ userId, title }: CreateBoardType): Promise
     title: string;
     ownerId: string;
 }>;
+export declare function getBoards(userId: string): Promise<{
+    id: string;
+    title: string;
+}[]>;
 export {};
 //# sourceMappingURL=board.service.d.ts.map

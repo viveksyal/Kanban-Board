@@ -19,3 +19,11 @@ export async function createBoard({userId, title}: CreateBoardType){
     });
     return boardData;
 }
+
+export async function getBoards(userId: string){
+    const boards = await prisma.board.findMany({
+        where: {ownerId: userId},
+        select: {id: true, title: true}
+    });
+    return boards;
+}
