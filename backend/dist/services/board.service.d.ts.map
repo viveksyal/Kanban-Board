@@ -1,1 +1,0 @@
-{"version":3,"file":"board.service.d.ts","sourceRoot":"","sources":["../../src/services/board.service.ts"],"names":[],"mappings":"AAIA,KAAK,eAAe,GAAG;IACnB,MAAM,EAAE,MAAM,CAAC;IACf,KAAK,EAAE,MAAM,CAAA;CAChB,CAAA;AAKD,wBAAsB,WAAW,CAAC,EAAC,MAAM,EAAE,KAAK,EAAC,EAAE,eAAe;;;;GAQjE;AAED,wBAAsB,SAAS,CAAC,MAAM,EAAE,MAAM;;;KAM7C"}
