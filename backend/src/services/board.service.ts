@@ -52,3 +52,18 @@ export async function updateBoard({userId, boardId, title}: {userId: string, boa
     });
     return board;
 }
+
+export async function deleteBoard({userId, boardId}: {userId: string, boardId: string}){
+    const boardExists = await prisma.board.findFirst({
+        where: {ownerId: userId, id: boardId},
+        select: {id: true}
+    });
+    if (boardExists === null){
+        throw appError("Board not found", 404);
+    }
+    const board = await prisma.board.delete({
+        where: {id: boardId},
+        select: {id: true, title: true}
+    });
+    return board;
+}

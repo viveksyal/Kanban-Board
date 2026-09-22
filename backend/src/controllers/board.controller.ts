@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { createBoard, getBoard, getBoards, updateBoard } from "../services/board.service.js";
+import { createBoard, deleteBoard, getBoard, getBoards, updateBoard } from "../services/board.service.js";
 
 
 export async function createBoardController(req: Request, res: Response){
@@ -39,6 +39,15 @@ export async function updateBoardController(req: Request <{boardId: string}>, re
     const board = await updateBoard({userId, boardId, title});
     res.status(200).json({
         message: "Board updated successfully",
+        board
+    })
+}
+export async function deleteBoardController(req: Request <{boardId: string}>, res: Response){
+    const userId = req.user.userId;
+    const boardId = req.params.boardId;
+    const board = await deleteBoard({userId, boardId});
+    res.status(200).json({
+        message: "Board deleted successfully",
         board
     })
 }
