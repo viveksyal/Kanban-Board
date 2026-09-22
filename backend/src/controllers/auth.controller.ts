@@ -18,6 +18,7 @@ export async function loginController(req: Request, res: Response){
     res.cookie('token', token, {
         httpOnly: true,
         sameSite: 'strict',
+        secure: false,
         maxAge: 1000*60*60*24*7 
     });
     return res.status(200).json({

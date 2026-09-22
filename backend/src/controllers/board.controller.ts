@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { createBoard, getBoards } from "../services/board.service.js";
+import { createBoard, getBoard, getBoards, updateBoard } from "../services/board.service.js";
 
 
 export async function createBoardController(req: Request, res: Response){
@@ -20,5 +20,25 @@ export async function getBoardsController(req: Request, res: Response){
     res.status(200).json({
         message: "Boards fetched successfully",
         boards
+    })
+}
+
+export async function getBoardController(req: Request <{boardId: string}>, res: Response){
+    const userId = req.user.userId;
+    const boardId = req.params.boardId;
+    const board = await getBoard({userId, boardId});
+    res.status(200).json({
+        message: "Board fetched successfully",
+        board
+    })
+}
+export async function updateBoardController(req: Request <{boardId: string}>, res: Response){
+    const userId = req.user.userId;
+    const boardId = req.params.boardId;
+    const {title} = req.body;
+    const board = await updateBoard({userId, boardId, title});
+    res.status(200).json({
+        message: "Board updated successfully",
+        board
     })
 }
