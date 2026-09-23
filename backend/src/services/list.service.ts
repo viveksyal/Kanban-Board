@@ -7,6 +7,11 @@ type CreateListType = {
     boardId: string
 }
 
+type GetListType = {
+    userId: string,
+    boardId: string
+}
+
 
 export async function createList({userId, title, boardId}: CreateListType){
     const boardData = await prisma.board.findFirst({
@@ -37,4 +42,25 @@ export async function createList({userId, title, boardId}: CreateListType){
         }
     });
     return listData;
+}
+
+
+export async function getLists({userId, boardId}: GetListType){
+    const boardData = await prisma.board.findFirst({
+        where: {id: boardId, ownerId: userId},
+        select: {
+            lists: {
+                orderBy: {
+                    order: "asc"
+                },
+                select: {id: true, title: true,order: true}
+            }
+        }
+    })
+
+    if (boardData === null){
+        throw appError("Board not found", 404)
+    }
+
+    return boardData.lists;
 }
