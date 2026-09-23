@@ -7,7 +7,7 @@ export async function createBoardController(req: Request, res: Response){
     const userId = req.user.userId
     const boardData = await createBoard({userId,title});
     res.status(201).json({
-        message: "board created successfully",
+        message: "Board created successfully",
         id: boardData.id,
         title: boardData.title,
         ownerId: boardData.ownerId
