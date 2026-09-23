@@ -7,9 +7,20 @@ type CreateListType = {
     boardId: string
 }
 
+type UpdateListType = {
+    userId: string,
+    title: string,
+    listId: string
+}
+
 type GetListType = {
     userId: string,
     boardId: string
+}
+
+type DeleteListType = {
+    userId: string,
+    listId: string
 }
 
 
@@ -63,4 +74,50 @@ export async function getLists({userId, boardId}: GetListType){
     }
 
     return boardData.lists;
+}
+
+export async function updateList({userId, title, listId}: UpdateListType){
+    const listExists = await prisma.list.findFirst({
+        where: {
+            id: listId,
+            board: {
+                ownerId: userId
+            }
+        },
+        select : {id: true}
+    })
+
+    if (listExists === null){
+        throw appError("List not found", 404)
+    }
+
+    const list = await prisma.list.update({
+        where: {id: listId},
+        data: {title: title}
+    })
+
+    return list;
+}
+
+export async function deleteList({userId, listId}: DeleteListType){
+    const listExists = await prisma.list.findFirst({
+        where: {
+            id: listId,
+            board: {
+                ownerId: userId
+            }
+        },
+        select : {id: true}
+    })
+
+    if (listExists === null){
+        throw appError("List not found", 404)
+    }
+
+    const list = await prisma.list.delete({
+        where: {id: listId},
+        select: {id: true, title: true, order: true}
+    })
+
+    return list;
 }
