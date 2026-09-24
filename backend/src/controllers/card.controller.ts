@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { createCard } from "../services/card.service.js";
+import { createCard, getCards, updateCard } from "../services/card.service.js";
 
 
 export async function createCardController(req: Request <{listId: string}>, res: Response){
@@ -14,4 +14,28 @@ export async function createCardController(req: Request <{listId: string}>, res:
         description: cardData.description,
         order: cardData.order
     })
+}
+
+export async function getCardsController(req: Request <{listId: string}>, res: Response){
+    const userId = req.user.userId
+    const listId = req.params.listId
+    const cards = await getCards({userId, listId});
+    res.status(201).json({
+        message: "Cards fetched successfully",
+        cards
+    })
+}
+
+export async function updateCardController(req: Request <{cardId: string}>, res: Response){
+    const {title, description} = req.body;
+    const userId = req.user.userId;
+    const cardId = req.params.cardId;
+    const cardData = await updateCard({userId, title, description, cardId});
+    res.status(200).json({
+        message: "Card updated successfully",
+        id: cardData.id,
+        title: cardData.title,
+        description: cardData.description,
+        order: cardData.order
+    });
 }
