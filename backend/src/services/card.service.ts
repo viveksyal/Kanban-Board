@@ -15,6 +15,11 @@ type UpdateCardType = {
     cardId: string
 }
 
+type DeleteCardType = {
+    userId: string,
+    cardId: string
+}
+
 type GetCardsType = {
     userId: string,
     listId: string
@@ -106,6 +111,30 @@ export async function updateCard({userId, title, description, cardId}: UpdateCar
     const card = await prisma.card.update({
         where: {id: cardId},
         data
+    })
+
+    return card;
+}
+
+export async function deleteCard({userId, cardId}: DeleteCardType){
+
+    const cardExists = await prisma.card.findFirst({
+        where: {
+            id: cardId,
+            list: {
+                board: {ownerId: userId}
+            }
+        },
+        select : {id: true}
+    })
+
+    if (cardExists === null){
+        throw appError("Card not found", 404)
+    }
+
+    const card = await prisma.card.delete({
+        where: {id: cardId},
+        select: {id: true, title: true, description: true, order: true}
     })
 
     return card;

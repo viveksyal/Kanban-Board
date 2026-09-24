@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { createCard, getCards, updateCard } from "../services/card.service.js";
+import { createCard, deleteCard, getCards, updateCard } from "../services/card.service.js";
 
 
 export async function createCardController(req: Request <{listId: string}>, res: Response){
@@ -33,6 +33,19 @@ export async function updateCardController(req: Request <{cardId: string}>, res:
     const cardData = await updateCard({userId, title, description, cardId});
     res.status(200).json({
         message: "Card updated successfully",
+        id: cardData.id,
+        title: cardData.title,
+        description: cardData.description,
+        order: cardData.order
+    });
+}
+
+export async function deleteCardController(req: Request <{cardId: string}>, res: Response){
+    const userId = req.user.userId;
+    const cardId = req.params.cardId;
+    const cardData = await deleteCard({userId, cardId});
+    res.status(200).json({
+        message: "Card deleted successfully",
         id: cardData.id,
         title: cardData.title,
         description: cardData.description,
