@@ -25,6 +25,14 @@ type GetCardsType = {
     listId: string
 }
 
+type ReorderCardType = {  
+    userId: string,
+    currentCardId: string,
+    previousCardId: string | null,
+    nextCardId: string | null
+
+}
+
 
 export async function createCard({userId, title, description, listId}: CardType){
     const listData = await prisma.list.findFirst({
@@ -138,4 +146,59 @@ export async function deleteCard({userId, cardId}: DeleteCardType){
     })
 
     return card;
+}
+
+export async function reorderCard({ userId, previousCardId, currentCardId, nextCardId }: ReorderCardType) {
+    const cardIds = [previousCardId, currentCardId, nextCardId].filter(id => id != null)
+    
+    const cards = await prisma.card.findMany({
+        where: {list: {board: {ownerId: userId} }, id: {in: cardIds}},
+        select: {id: true, order: true, listId: true}
+    })
+
+    const currentCard = cards.find(
+        card => card.id === currentCardId
+    );
+
+    const previousCard = cards.find(
+        card=> card.id === previousCardId
+    );
+    
+    const nextCard = cards.find(
+        card => card.id === nextCardId
+    );
+    
+    if (!currentCard) {
+        throw appError("Current card not found", 404);
+    }
+
+    if (!previousCard && nextCard !== undefined) {
+        throw appError("Previous card not found", 404);
+    }
+
+    if (!nextCard && previousCard !== undefined) {
+        throw appError("Next card found", 404);
+    }
+
+    if ((previousCard && previousCard.listId !== currentCard.listId) || (nextCard && nextCard.listId !== currentCard.listId)) {
+        throw appError("Cards must belong to the same board", 400);
+    }
+
+    let newOrder: number;
+
+    if(!previousCard){ 
+        newOrder = nextCard!.order/2;
+    } else if(!nextCard){
+        newOrder = previousCard.order + 1000;
+    } else{
+        newOrder = (previousCard.order + nextCard.order)/2;
+    }
+
+    const updatedCardOrder = await prisma.card.update({
+        where: {id: currentCardId},
+        data: {
+            order: newOrder
+        }
+    });
+    return updatedCardOrder;
 }

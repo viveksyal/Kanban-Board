@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { createList, deleteList, getLists, updateList } from "../services/list.service.js";
+import { createList, deleteList, getLists, reorderList, updateList } from "../services/list.service.js";
 
 
 export async function createListController(req: Request <{boardId: string}>, res: Response){
@@ -49,5 +49,15 @@ export async function deleteListController(req: Request <{listId: string}>, res:
         id: listData.id,
         title: listData.title,
         order: listData.order,
+    });
+}
+
+export async function reorderListController(req: Request, res: Response){
+    const userId = req.user.userId;
+    const {previousListId, currentListId, nextListId} = req.body;
+    const updatedListOrder = await reorderList({userId, previousListId, currentListId, nextListId});
+    res.status(200).json({
+        message:"List reordered successfully",
+        updatedListOrder
     });
 }

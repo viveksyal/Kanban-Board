@@ -37,7 +37,7 @@ model Card {
   id          String  @id @default(uuid())
   title       String
   description String?
-  order       Int
+  order       Float
   listId      String
   list        List    @relation(fields: [listId], references: [id], onDelete: Cascade)
 }

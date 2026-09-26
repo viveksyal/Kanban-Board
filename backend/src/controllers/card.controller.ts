@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { createCard, deleteCard, getCards, updateCard } from "../services/card.service.js";
+import { createCard, deleteCard, getCards, reorderCard, updateCard } from "../services/card.service.js";
 
 
 export async function createCardController(req: Request <{listId: string}>, res: Response){
@@ -20,7 +20,7 @@ export async function getCardsController(req: Request <{listId: string}>, res: R
     const userId = req.user.userId
     const listId = req.params.listId
     const cards = await getCards({userId, listId});
-    res.status(201).json({
+    res.status(200).json({
         message: "Cards fetched successfully",
         cards
     })
@@ -50,5 +50,14 @@ export async function deleteCardController(req: Request <{cardId: string}>, res:
         title: cardData.title,
         description: cardData.description,
         order: cardData.order
+    });
+}
+export async function reorderCardController(req: Request, res: Response){
+    const userId = req.user.userId;
+    const {previousCardId, currentCardId, nextCardId} = req.body;
+    const updatedCardOrder = await reorderCard({userId, previousCardId, currentCardId, nextCardId});
+    res.status(200).json({
+        message:"Card reordered successfully",
+        updatedCardOrder
     });
 }

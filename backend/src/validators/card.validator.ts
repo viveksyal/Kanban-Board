@@ -15,3 +15,9 @@ export const UpdateCardSchema = z.object({
 export const CardParamsSchema = z.object({
         cardId: z.string().trim()
 })
+
+export const CardReorderSchema = z.object({
+        previousCardId: z.string().trim(),
+        cardId: z.string().trim(),
+        nextCardId: z.string().trim()
+})
